@@ -22,42 +22,11 @@
 
 </head>
 <body>
-    <div class="container"> <!-- Beginning of Container -->
-        <h1 style="color: blue">Save Travels</h1>
-        
-    <table class="table table-secondary container">
-		<thead>
-			<tr>
-				<th scope="col">#ID</th>
-				<th scope="col">Name</th>
-				<th scope="col">Vendor</th>
-				<th scope="col">Amount</th>
-				<th scope="col">Description</th>
-				<th scope="col">Actions: </th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="expense" items="${allExpenses}">
-				<tr>
-					<th scope="row">${expense.id}</th>
-					<td><a href="/expenses/${expense.id}">${expense.expenseName}</a></td>
-					<td>${expense.vendor}</td>
-					<td>$${expense.amount}</td>
-					<td>${expense.description}</td>
-					<td>
-					<a href="/expenses/edit/${expense.id}">Edit</a> || 
-					<a href="/expenses/delete/${expense.id}">Delete</a>
-					</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<hr />
-        
-        
-        <h3 style="text-align: center">Add an Expense</h3>
-        	<form:form action="/expenses" method="post" modelAttribute="expense" style="width: 50%" class="container">
-	<div class="form-group">
+	<div class="container">
+		<h1>Edit Expense</h1>
+		<form:form action="/expenses/update/${expense.id}" method="post" modelAttribute="expense" style="width: 50%" class="container">
+			<input type="hidden" name="_method" value="put">
+			<div class="form-group">
 	<p>
         <form:label path="expenseName">Name</form:label>
         <br /><form:errors path="expenseName" class="text-danger"/>
@@ -78,9 +47,13 @@
         <br /><form:errors path="description" class="text-danger"/>     
         <form:textarea path="description" class="form-control"/>
     </p>    
-    <input type="submit" value="Submit"/>    
+    <p>
+    <input type="submit" value="Submit" class="btn btn-info"/>
+    <a href="/expenses" class="btn btn-warning">Home</a>
+    <a href="/expenses/delete/${expense.id}" class="btn btn-danger">Delete</a>
+    </p>
 	</div>
-	</form:form> 
-    </div> <!-- End of Container -->
+		</form:form>
+	</div>
 </body>
 </html>
